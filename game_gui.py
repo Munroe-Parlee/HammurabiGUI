@@ -2,7 +2,7 @@ import sys
 from PyQt6.QtCore import QSize, Qt 
 from PyQt6.QtWidgets import QTableView, QDialog, QLabel, QLineEdit,QVBoxLayout, QWidget, QApplication, QMainWindow, QPushButton, QMessageBox, QGridLayout, QHBoxLayout, QStackedLayout
 from controller import Controller
-from page_gui import StartPageGUI
+from page_gui import StartPageWidget, InterfacePageWidget
 
 class GameGUI(QMainWindow):
     def __init__(self):
@@ -17,8 +17,18 @@ class GameGUI(QMainWindow):
         self.widget_stack.setLayout(self.layout_stack)
         self.setCentralWidget(self.widget_stack)
 
-        widget_start_page = StartPageGUI(self, self.controller)
+        widget_start_page = StartPageWidget(self, self.controller)
+        widget_interface_page = InterfacePageWidget(self, self.controller)
+
         self.layout_stack.addWidget(widget_start_page)
+        self.layout_stack.addWidget(widget_interface_page)
+
+
+
+    def set_central_widget(self, index):
+        self.layout_stack.setCurrentIndex(index)
+        self.widget_stack.setLayout(self.layout_stack)
+        self.setCentralWidget(self.widget_stack)
 
 
 
