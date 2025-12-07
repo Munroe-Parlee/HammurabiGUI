@@ -12,18 +12,19 @@ class StartPageWidget(QWidget):
         self.layout_page = QVBoxLayout()
         self.setLayout(self.layout_page)
 
-        button_start = QPushButton('Start')
+        button_play = QPushButton('Play')
         button_quit = QPushButton('Quit')
 
-        self.layout_page.addWidget(button_start)
+        self.layout_page.addWidget(button_play)
         self.layout_page.addWidget(button_quit)
 
-        button_start.clicked.connect(self.button_start_clicked)
+        button_play.clicked.connect(self.button_start_clicked)
         button_quit.clicked.connect(self.button_quit_clicked)
 
     def button_start_clicked(self):
         self.parent.set_central_widget(1)
         pass
+
     def button_quit_clicked(self):
         self.parent.close()
         pass
@@ -66,10 +67,14 @@ class InterfacePageWidget(QWidget):
         self.text_feed = QLineEdit()
         
         button_exit = QPushButton('Exit')
+        button_restart = QPushButton('Restart')
         button_clear = QPushButton('Clear')
         button_enter = QPushButton('Enter')
 
+        
+
         button_exit.clicked.connect(self.button_exit_clicked)
+        button_restart.clicked.connect(self.button_restart_clicked)
         button_clear.clicked.connect(self.button_clear_clicked)
         button_enter.clicked.connect(self.button_enter_clicked)
 
@@ -89,12 +94,18 @@ class InterfacePageWidget(QWidget):
 
 
         self.layout_button_bar.addWidget(button_exit)
+        self.layout_button_bar.addWidget(button_restart)
         self.layout_button_bar.addWidget(button_clear)
         self.layout_button_bar.addWidget(button_enter)
 
     def button_exit_clicked(self):
         self.button_clear_clicked()
         self.parent.set_central_widget(0)
+        pass
+
+    def button_restart_clicked(self):
+        self.controller.restart()
+        self.refresh()
         pass
 
     def button_clear_clicked(self):
